@@ -1,0 +1,1 @@
+SESSION_KEY = 'Lorem ipsum dolor sit amet'

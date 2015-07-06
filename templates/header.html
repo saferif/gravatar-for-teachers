@@ -1,0 +1,42 @@
+{% macro nav_link(text, route) %}
+    {% set href = uri_for(route, *varargs, **kwargs) %}
+    <li{% if href == url %} class="active"{% endif %}>
+        <a href="{{ href }}">{{ text }}</a>
+    </li>
+{% endmacro %}
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ uri_for('main') }}">{{ site_name }}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            {% if current_user %}
+                <ul class="nav navbar-nav">
+                    {{ nav_link('Dashboard', 'dashboard') }}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span>
+                            {{ current_user.email }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {{ nav_link('Sign out', 'signout', _csrf_token=_csrf_token) }}
+                        </ul>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    {{ nav_link('Sign in', 'signin') }}
+                    {{ nav_link('Sign up', 'signup') }}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
