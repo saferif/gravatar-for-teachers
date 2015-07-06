@@ -11,8 +11,11 @@ class UploadAvatarHandler(BaseBlobstoreUploadHandler):
         try:
             upload = self.get_uploads()[0]
             email_hash = md5(self.user.email)
-
-            avatar = Avatar.create(email_hash, avatar=upload.key())
+            avatar = Avatar.get_by_id(email_hash)
+            if not avatar:
+                avatar = Avatar.create(email_hash, avatar=upload.key())
+            else:
+                avatar.avatar = upload.key()
             avatar.put()
         except:
             error = 'Error occurred during file upload'
