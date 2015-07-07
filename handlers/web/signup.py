@@ -36,7 +36,7 @@ class SignUpHandler(BaseRequestHandler):
         else:
             user = User.get_by_id(email)
             if user:
-                error = 'User with specified email already exist'
+                error = 'User with specified email already exists'
             else:
                 user = User.create(email, first_name=first_name, last_name=last_name, password_hash=md5(password))
                 user.put()

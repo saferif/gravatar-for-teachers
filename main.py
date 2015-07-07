@@ -22,7 +22,7 @@ application = WSGIApplication([
     Route('/upload_avatar', web.UploadAvatarHandler, 'upload_avatar'),
 
     #Route(r'/a/([^/]+)?', api.AvatarDownloadHandler, 'avatar')
-    Route(r'/a/<email_hash>', api.AvatarDownloadHandler, 'avatar')
+    Route(r'/a/<email_hash>', api.DownloadAvatarHandler, 'avatar')
 ], debug=True, config=config)
 
 jinja2.set_jinja2(jinja2.Jinja2(application, {

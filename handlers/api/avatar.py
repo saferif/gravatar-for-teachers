@@ -3,7 +3,7 @@ from google.appengine.ext.webapp.blobstore_handlers import BlobstoreDownloadHand
 from models import Avatar
 
 
-class AvatarDownloadHandler(BlobstoreDownloadHandler):
+class DownloadAvatarHandler(BlobstoreDownloadHandler):
     def get(self, email_hash):
         avatar = Avatar.get_by_id(email_hash)
         if (not avatar) or (not blobstore.get(avatar.avatar)):

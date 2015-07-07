@@ -1,1 +1,1 @@
-from avatar import AvatarDownloadHandler
+from avatar import DownloadAvatarHandler
